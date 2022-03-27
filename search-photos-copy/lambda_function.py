@@ -7,6 +7,7 @@ import logging
 import boto3
 from opensearchpy import OpenSearch, RequestsHttpConnection
 from requests_aws4auth import AWS4Auth
+import json
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
@@ -96,10 +97,23 @@ def lambda_handler(event, context):
 
     os.environ['TZ'] = 'America/New_York'
     time.tzset()
-    logger.debug('event.bot.name={}'.format(event['bot']['name']))
-
-    return dispatch(event)
-
+    # logger.debug('event.bot.name={}'.format(event['bot']['name']))
+    
+    transaction_type = event['queryStringParameters']['type']
+    print(transaction_type)
+    transaction_response = {
+        'transactionType': transaction_type
+    }
+    
+    response = {}
+    response['statusCode'] = 200
+    response['headers'] = {}
+    response['headers']['Content-Type'] = 'application/json'
+    response['body'] = json.dumps(transaction_response)
+    
+    return response
+    
+    # return dispatch(event)
     # print(event)
     # try:
     #     response = client.post_text(botName='photo',
