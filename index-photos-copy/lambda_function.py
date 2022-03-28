@@ -15,7 +15,7 @@ def lambda_handler(event, context):
     #print("Received event: " + json.dumps(event, indent=2))
 
     # Get the object from the event and show its content type
-    # usage_demo()
+    # usage_demo() 
     json_region = os.environ['AWS_REGION']
     return {
         "statusCode": 200,
