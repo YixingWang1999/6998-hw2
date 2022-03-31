@@ -9,7 +9,7 @@ from requests_aws4auth import AWS4Auth
 import time
 # print(time.time())
 
-
+   
  
 def lambda_handler(event, context):
     #print("Received event: " + json.dumps(event, indent=2))
